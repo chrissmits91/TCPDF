@@ -2003,6 +2003,11 @@ class TCPDF_FONTS {
 			$chars = str_split($str);
 			$carr = array_map('ord', $chars);
 		}
+		// FIX: When we completely remove the current font and only want our custom font to be present in the PDF we set the
+        // subset chars to an empty array.
+        if (!isset($currentfont['subsetchars'])) {
+            $currentfont['subsetchars'] = [];
+        }
 		$currentfont['subsetchars'] += array_fill_keys($carr, true);
 		return $carr;
 	}

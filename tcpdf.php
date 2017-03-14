@@ -22160,6 +22160,11 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 	 * @since 5.8.002 (2010-08-14)
 	 */
 	public function isUnicodeFont() {
+	    // FIX: Check if type is set before checking the type, return false directly.
+        // This will fix the issue where we want remove the current font completely and add a custom font only to the PDF.
+        if (!isset($this->CurrentFont['type'])) {
+            return false;
+        }
 		return (($this->CurrentFont['type'] == 'TrueTypeUnicode') OR ($this->CurrentFont['type'] == 'cidfont0'));
 	}
 
